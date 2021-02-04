@@ -2,6 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+<%!
+	int sum;	
+
+	private int sum(int a, int b){
+		this.sum=a+b;
+		return sum;
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,8 +19,23 @@
 		<title></title>
 		
 		<style>
-			body{background:<%=request.getParameter("color") %>}
+			body{background:${param.color}}
 		</style>
 	</head>
-	<body></body>
+	<body>
+		<h3>declaration : sum(3,4) = <%=sum(3,4) %></h3>
+		<hr/>
+		<h3>parameter : <%=request.getParameter("k") %> 
+						+ <%=request.getParameter("y") %> 
+						= <%=request.getAttribute("sum") %></h3>
+	</body>
 </html>
+
+
+
+
+
+
+
+
+
