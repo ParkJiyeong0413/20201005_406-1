@@ -17,6 +17,17 @@ public class MainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String url="/WEB-INF/views/paramForm.jsp";
+		
+		
+		request.getRequestDispatcher(url).forward(request, response);
+		
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("안녕하세요, 이곳은 MainServlet 입니다.");
 
 		// 입력
@@ -43,13 +54,6 @@ public class MainServlet extends HttpServlet {
 		
 		
 		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

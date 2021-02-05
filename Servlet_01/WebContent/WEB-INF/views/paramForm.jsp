@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>parameter test</h1>
-	<form action="<%=request.getContextPath() %>/main" method="get">
+	<form action="<%=request.getContextPath() %>/main" method="post">
 		k parameter : <input type="text" name="k" /><br/>
 		y parameter : <input type="text" name="y" /><br/>
 		color parameter : <input type="text" name="color" /><br/>
