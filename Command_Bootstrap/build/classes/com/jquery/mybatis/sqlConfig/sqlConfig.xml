@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties resource="com/jquery/properties/db.properties" />
+
+	<typeAliases>
+		<typeAlias type="java.lang.String" alias="str" />
+		<typeAlias type="java.lang.Integer" alias="int" />
+		
+		<typeAlias type="com.jquery.command.SearchCriteria" alias="cri" />
+		<typeAlias type="com.jquery.dto.MenuVO" alias="menu" />
+		<typeAlias type="com.jquery.dto.BoardVO" alias="board" />
+		<typeAlias type="com.jquery.dto.ReplyVO" alias="reply" />
+		<typeAlias type="com.jquery.dto.AttachVO" alias="attach" />
+
+	</typeAliases>
+
+	<environments default="dev">
+		<environment id="dev">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driverClassName}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				
+				<!-- pool setting -->
+				<property value="2" name="poolMaximumActiveConnections"/>
+				<property value="3" name="poolMaximumIdleConnections"/>
+				
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers> 
+		<mapper resource="com/jquery/mybatis/mappers/Menu-Mapper.xml"/>
+		<mapper resource="com/jquery/mybatis/mappers/Board-Mapper.xml"/>
+		<mapper resource="com/jquery/mybatis/mappers/Reply-Mapper.xml"/>
+		<mapper resource="com/jquery/mybatis/mappers/Attach-Mapper.xml"/>
+	</mappers>	
+</configuration>
+
+
+
+
+
+
+
+
