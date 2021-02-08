@@ -21,6 +21,19 @@ public class MainServlet extends HttpServlet {
 		String url="/WEB-INF/views/paramForm.jsp";
 		
 		
+		String loginUser = (String)request.getSession().getAttribute("loginUser");
+		if(loginUser==null) {
+			 response.setContentType("text/html;charset=utf-8");
+			 PrintWriter out = response.getWriter();
+			 out.println("<script>");
+			 out.println("alert('로그인은 필수입니다.');");
+			 out.println("location.href='"+request.getContextPath()+"/login';");
+			 out.println("</script>");
+			 
+			 out.close();
+			 return;
+		}
+		
 		request.getRequestDispatcher(url).forward(request, response);
 		
 		

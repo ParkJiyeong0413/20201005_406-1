@@ -28,6 +28,8 @@
 						+ <%=request.getParameter("y") %> 
 						= <%=request.getAttribute("sum") %></h3>
 	</body>
+	
+	
 </html>
 
 

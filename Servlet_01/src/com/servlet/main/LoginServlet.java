@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -20,7 +21,8 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 처리 요청
-			
+		String url=request.getContextPath()+"/main?state=1";
+		
 		//입력처리
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
@@ -30,22 +32,19 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("id : "+id);
 		System.out.println("pwd : "+pwd);
 		
-		String message = "<script>";
 		
 		if(id.equals("mimi") && pwd.equals("mimi")) { //로그인 성공
-			message+="alert('로그인 성공입니다.');";
-			message+="location.href='"+request.getContextPath()+"/main';";
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", "mimi");
+			
 		}else {
-			message+="alert('아이디 혹은 패스워드가 일치하지 않습니다');";
-			message+="location.href='"+request.getContextPath()+"/login';";
+			url=request.getContextPath()+"/login?error=1";
 		}
-		 message+="</script>";
 		
 		//화면전환
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
 		
-		out.print(message);
+		response.sendRedirect(url);
 	}
 
 }

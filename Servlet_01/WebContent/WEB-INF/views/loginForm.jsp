@@ -16,5 +16,17 @@
 		패스워드  : <input type="password" name="pwd"/><br/>
 		<input type="submit" value="로그인" />
 	</form>
+	
+	<script>
+		if(<%=request.getParameter("error")!=null && request.getParameter("error").equals("1")%>){
+			alert("아이디 혹은 패스워드가 일치하지 않습니다.");
+		}
+	</script>
 </body>
 </html>
+
+
+
+
+
+
