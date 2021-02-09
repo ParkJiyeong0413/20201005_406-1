@@ -16,6 +16,7 @@
 		<typeAlias type="com.jquery.dto.BoardVO" alias="board" />
 		<typeAlias type="com.jquery.dto.ReplyVO" alias="reply" />
 		<typeAlias type="com.jquery.dto.AttachVO" alias="attach" />
+		<typeAlias type="com.jquery.dto.MemberVO" alias="member"/>
 
 	</typeAliases>
 
@@ -41,6 +42,7 @@
 		<mapper resource="com/jquery/mybatis/mappers/Board-Mapper.xml"/>
 		<mapper resource="com/jquery/mybatis/mappers/Reply-Mapper.xml"/>
 		<mapper resource="com/jquery/mybatis/mappers/Attach-Mapper.xml"/>
+		<mapper resource="com/jquery/mybatis/mappers/Member-Mapper.xml"/>
 	</mappers>	
 </configuration>
 
