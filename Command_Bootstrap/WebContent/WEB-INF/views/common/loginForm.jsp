@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +75,17 @@
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 
+<script>
+	var message = "<%=session.getAttribute("msg")==null ? "":session.getAttribute("msg")%>";
+	if(message!=""){
+		alert(message);
+	}
+	
+	$('input[name="id"]').focus();
+</script>
 </body>
 </html>
+
+<% session.removeAttribute("msg"); %>
 
 

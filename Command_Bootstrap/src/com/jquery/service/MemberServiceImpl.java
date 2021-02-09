@@ -57,8 +57,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO getMember(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			MemberVO member = memberDAO.selectMemberById(session, id);
+			return member;
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
