@@ -1,7 +1,17 @@
+<%@page import="com.jsp.dto.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<%
+	//처리
+	MemberVO member = new MemberVO();
+	member.setId("mimi111");
+	member.setEmail("mimi111@naver.com");
+	member.setName("mimi111");
+	member.setPhone("000-1234-1234");
+	
+	pageContext.setAttribute("member", member);
+%>
 
 <body>
 
@@ -22,27 +32,27 @@
 	                  <label for="inputEmail3" class="col-sm-3 control-label text-right">아이디</label>
 	
 	                  <div class="col-sm-9">
-	                    <input name="id" type="text" class="form-control" id="inputEmail3"  value="" readonly>
+	                    <input name="id" type="text" class="form-control" id="inputEmail3"  value="${member.id}" readonly>
 	                  </div>
 	                </div>	               
 	                <div class="form-group row">
 	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">이  름</label>
 	
 	                  <div class="col-sm-9">
-	                    <input name="pwd" type="text" class="form-control" id="inputPassword3" value="" readonly>
+	                    <input name="pwd" type="text" class="form-control" id="inputPassword3" value="${member.name} " readonly>
 	                  </div>
 	                </div>
 	                 <div class="form-group row">
 	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">이메일</label>
 	
 	                  <div class="col-sm-9">
-	                    <input name="email" type="email" class="form-control" id="inputPassword3" value="" readonly>
+	                    <input name="email" type="email" class="form-control" id="inputPassword3" value="${member.email }" readonly>
 	                  </div>
 	                </div>
 	                 <div class="form-group row">
 	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">전화번호</label>
 	                  <div class="col-sm-9">   
-	                  	<input name="phone" type="text" class="form-control" id="inputPassword3" value="" readonly>	                
+	                  	<input name="phone" type="text" class="form-control" id="inputPassword3" value="${member.phone }" readonly>	                
 	                  </div>                  
 	                </div>               
 	              </div>  

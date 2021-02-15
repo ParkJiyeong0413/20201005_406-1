@@ -1,4 +1,4 @@
-package com.jquery.dto;
+package com.jsp.dto;
 
 import java.util.Date;
 
