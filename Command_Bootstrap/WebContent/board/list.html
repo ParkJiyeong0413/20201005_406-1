@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
      		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">글등록</button>				
+				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.html','글등록',800,700);">글등록</button>				
 				<div id="keyword" class="card-tools" style="width:550px;">
 					<div class="input-group row">	
 						 <!-- sort num -->
@@ -138,21 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 {{/each}}
 </script>
 <script>
-function regist_go(){
 
-	$.ajax({
-		url:'/session/getLoginUser.do',
-		type:'get',
-		success:function(data){
-			OpenWindow('registForm.html','글등록',800,700);
-		},
-		error:function(){
-			alert("로그인은 필수입니다.");
-			window.parent.location.href="/common/loginForm.html";
-			window.close();
-		}
-	});
-}
 
 
 //alert(getCookie("keyword"));
