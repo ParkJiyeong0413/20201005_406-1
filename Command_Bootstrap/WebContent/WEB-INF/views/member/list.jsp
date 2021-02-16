@@ -1,3 +1,4 @@
+<%@page import="com.jquery.command.PageMaker"%>
 <%@page import="com.jquery.dto.MemberVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -107,12 +108,22 @@
 			${pageMaker.prev ? pageMaker.startPage-1 : 1}				
 			);"><i class="fas fa-angle-left"></i></a>
 		</li>
+		
+		<% 
+			PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+			for(int i=pageMaker.getStartPage();i<pageMaker.getEndPage()+1;i++){
+			pageContext.setAttribute("pageNum",i);
+			%>
+			
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:searchList_go(${pageNum});" >${pageNum }
+				</a>
+			</li>
+			
+		<%				
+			} %>
+		
 								
-		<li class="page-item 
-			<c:out value="${pageMaker.cri.page == pageNum?'active':''}"/>">
-			<a class="page-link" href="javascript:searchList_go(${pageNum});" >${pageNum }
-			</a>
-		</li>
 		
 		<li class="page-item">
 			<a class="page-link" href="javascript:searchList_go(
