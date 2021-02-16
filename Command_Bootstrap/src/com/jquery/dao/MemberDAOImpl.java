@@ -3,6 +3,7 @@ package com.jquery.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.jquery.command.SearchCriteria;
@@ -12,14 +13,21 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> selectMemberList(SqlSession session, SearchCriteria cri) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		List<MemberVO> memberList = null;
+		memberList=session.selectList("Member-Mapper.selectSearchMemberList",cri,rowBounds);
+
+		return memberList;
 	}
 
 	@Override
 	public int selectMemberListCount(SqlSession session, SearchCriteria cri) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int count=0;		
+		count=session.selectOne("Member-Mapper.selectSearchMemberListCount",cri);
+		return count;
 	}
 
 	@Override

@@ -1,12 +1,14 @@
 package com.jquery.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.jquery.command.PageMaker;
 import com.jquery.command.SearchCriteria;
 import com.jquery.dao.MemberDAO;
 import com.jquery.dao.MemberDAOImpl;
@@ -51,8 +53,22 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Map<String, Object> getSearchMemberList(SearchCriteria cri) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			List<MemberVO> memberList = memberDAO.selectMemberList(session, cri);
+
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(memberDAO.selectMemberListCount(session, cri));
+
+			Map<String, Object> dataMap = new HashMap<String, Object>();
+			dataMap.put("memberList", memberList);
+			dataMap.put("pageMaker", pageMaker);
+
+			return dataMap;
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
