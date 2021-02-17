@@ -1,3 +1,4 @@
+<%@page import="com.jquery.command.SearchCriteria"%>
 <%@page import="com.jquery.command.PageMaker"%>
 <%@page import="com.jquery.dto.MemberVO"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,10 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<%
+	SearchCriteria cri = ((PageMaker)request.getAttribute("pageMaker")).getCri();
+	pageContext.setAttribute("cri",cri);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +41,7 @@
     	  		<div id="keyword" class="card-tools" style="width:550px;">
 				  <div class="input-group row">	
 				 	 <!-- sort num -->
-				 	 <select class="form-control col-md-3" name="perPageNum" id="perPageNum">
+				 	 <select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="searchList_go(${cri.page });">
 				  		<option value="10" >정렬개수</option>
 				  		<option value="2" ${cri.perPageNum == 2 ? 'selected':''}>2개씩</option>
 				  		<option value="3" ${cri.perPageNum == 3 ? 'selected':''}>3개씩</option>
@@ -50,7 +55,7 @@
 						<option value="e"  ${cri.searchType eq 'e' ? 'selected':''}>이메일</option>
 					</select>			 										
 					<input  class="form-control" type="text" name="keyword" 
-					placeholder="검색어를 입력하세요." value=""/>
+					placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
 					<span class="input-group-append">
 						<button class="btn btn-primary" type="button" 
 						id="searchBtn" data-card-widget="search" onclick="searchList_go(1);">
@@ -149,8 +154,42 @@
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+ 
+<form id="jobForm">
+	<input type='hidden' name="page" value="${cri.page}" />
+	<input type='hidden' name="perPageNum" value="${cri.perPageNum}"/>
+	<input type='hidden' name="searchType" value="${cri.searchType }" />
+	<input type='hidden' name="keyword" value="${cri.keyword }" />
+</form>
 
 <script>
+function searchList_go(page,url){
+	
+	var jobForm=$('#jobForm');
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());
+	jobForm.attr("method","post");
+	if(url){
+		jobForm.attr("action",url)
+	}else{
+		jobForm.attr("action","list.do")
+	}
+	
+	jobForm.submit();
+}
+
 </script>
 
+
 </body>
+
+
+
+
+
+
+
+
