@@ -104,5 +104,22 @@
 
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
+<script> //사진이미지 불러오기
+var imageURL = "getPicture.do?picture=${member.picture}";
+$('div#pictureView').css({'background-image':'url('+imageURL+')',
+						  'background-position':'center',
+						  'background-size':'cover',
+						  'background-repeat':'no-repeat'
+						});
+$('input').css("border","none").prop("readonly",true);
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
