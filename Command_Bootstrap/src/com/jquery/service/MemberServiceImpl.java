@@ -95,7 +95,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void modify(MemberVO member) throws SQLException {
-		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+
+			memberDAO.updateMember(session, member);
+		} finally {
+			session.close();
+		}
 
 	}
 

@@ -34,14 +34,15 @@
 		<div class="register-box" style="min-width:450px;">	
 			<div class="register-card-body">	
 				<div class="row">					
-					<input type="hidden" name="oldPicture" value="" />
+					<input type="hidden" name="oldPicture" value="${member.picture }" />
 					<input type="file" id="inputFile" name="picture" style="display:none" />
 					<div class="input-group col-md-12">
 						<div class="col-md-12" style="text-align: center;">
 							<div class="" id="pictureView" style="border: 1px solid green; height: 200px; width: 140px; margin: 0 auto; margin-bottom:5px;"></div>														
 							<div class="input-group input-group-sm">
 								<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon">사진변경</label>
-								<input id="inputFileName" class="form-control" type="text" name="tempPicture" disabled/>
+								<input id="inputFileName" class="form-control" type="text" name="tempPicture" disabled
+									value="${member.picture.split('\\$\\$')[1] }"/>
 								<input id="picture" class="form-control" type="hidden" name="uploadPicture" />
 							</div>						
 						</div>												
@@ -100,10 +101,10 @@
                 </div>  
 				
 				<div class="card-footer row" style="margin-top: 0; border-top: none;">						
-					<button type="button" id="modifyBtn" 
+					<button type="button" id="modifyBtn"  onclick="modify_go();"
 						class="btn btn-warning col-sm-4 text-center" >수정하기</button>
 					<div class="col-sm-4"></div>
-					<button type="button" id="cancelBtn"
+					<button type="button" id="cancelBtn" onclick="history.go(-1);"
 						class="btn btn-default pull-right col-sm-4 text-center">취 소</button>
 				</div>	
 			</div>
@@ -122,4 +123,62 @@
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+
+<script>//회원 수정 submit
+function modify_go(){
+	//alert("modify btn click");
+	var form=$('form[role="form"]');	
+	form.submit();
+}
+</script>
+
+<script> //사진 미리보기
+var imageURL = "getPicture.do?picture=${member.picture}";
+$('div#pictureView').css({'background-image':'url('+imageURL+')',
+						  'background-position':'center',
+						  'background-size':'cover',
+						  'background-repeat':'no-repeat'
+						});
+</script>
+<script> //사진 변경
+$('input#inputFile').on('change',function(event){
+	//alert('file change');
+	
+	var fileFormat=
+		this.value.substr(this.value.lastIndexOf(".")+1).toUpperCase();
+	//이미지 확장자 jpg 확인
+	if(!(fileFormat=="JPG" || fileFormat=="JPEG")){
+		alert("이미지는 jpg 형식만 가능합니다.");
+		return;
+	} 
+	//이미지 파일 용량 체크
+	if(this.files[0].size>1024*1024*1){
+		alert("사진 용량은 1MB 이하만 가능합니다.");
+		return;
+	};
+	
+	document.getElementById('inputFileName').value=this.files[0].name;
+	if (this.files && this.files[0]) {
+		
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+        	//이미지 미리보기	        	
+        	$('div#pictureView')
+        	.css({'background-image':'url('+e.target.result+')',
+				  'background-position':'center',
+				  'background-size':'cover',
+				  'background-repeat':'no-repeat'
+        		});
+        }
+        
+        reader.readAsDataURL(this.files[0]);
+	}
+	
+	// 이미지 변경 확인
+	$('input[name="uploadPicture"]').val(this.files[0].name);
+});
+</script>
 </body>
+
+
