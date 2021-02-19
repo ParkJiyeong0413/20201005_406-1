@@ -38,7 +38,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void insertMember(SqlSession session, MemberVO member) throws SQLException {
-		// TODO Auto-generated method stub
+		session.update("Member-Mapper.insertMember",member);
 
 	}
 
