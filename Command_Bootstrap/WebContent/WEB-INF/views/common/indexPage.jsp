@@ -160,10 +160,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/resources/bootstrap/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<%=request.getContextPath() %>/member/getPicture.do?picture=${loginUser.picture}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+           <div class="row">
+              <a href="javascript:OpenWindow('<%=request.getContextPath() %>/member/detail.do?id=${loginUser.id}','','800','700');" class="d-block">${loginUser.name }</a>
+              <button onclick="<%=request.getContextPath() %>/common/logout.do" class="btn btn-xs btn-primary col-xs-3 " type="button" >LOGOUT</button>
+           </div>
+           <a href="tel:${loginUser.phone }">tel : ${loginUser.phone }</a><br/>
+           <a href="mailto:${loginUser.email }">email : ${loginUser.email }</a>		
         </div>
       </div>
 

@@ -3,6 +3,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-
-	location.href="<%=request.getContextPath()%>/common/loginForm.do";
+	<c:if test="${empty loginUser}" >
+		location.href="<%=request.getContextPath()%>/common/loginForm.do";
+	</c:if>
+	<c:if test="${!empty loginUser}" >
+		location.href="<%=request.getContextPath()%>/index.do";
+	</c:if>
 </script>

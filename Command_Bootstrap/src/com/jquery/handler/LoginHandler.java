@@ -37,6 +37,7 @@ public class LoginHandler implements CommandHandler {
 			
 			//로그인 성공
 			session.setAttribute("loginUser", memberService.getMember(id));
+			//session.setMaxInactiveInterval(10);
 			
 		}catch(NotFoundIDException | InvalidPasswordException e) {
 			url=request.getContextPath()+"/common/loginForm.do";
