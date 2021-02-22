@@ -1,8 +1,7 @@
 package com.jquery.handler;
 
-import java.util.HashMap;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,20 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 import com.jquery.dto.MenuVO;
 import com.jquery.service.MenuService;
 import com.jquery.service.MenuServiceImpl;
-import com.jquery.utils.JsonResolver;
 
-public class MainMenuHandler implements CommandHandler {
+public class IndexHandler implements CommandHandler {
 
-	private MenuService menuService = new MenuServiceImpl();
+	private MenuService menuService=new MenuServiceImpl();
+	public void setMenuService(MenuService menuService) {
+		this.menuService = menuService;
+	}
 	
 	@Override
-	public boolean isRedirect(HttpServletRequest req) {
-		// TODO Auto-generated method stub
+	public boolean isRedirect(HttpServletRequest request) {
 		return false;
 	}
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String url="/WEB-INF/views/common/indexPage.jsp";
+		
 		String mCode = request.getParameter("mCode");
 		
 		if(mCode ==null) mCode="M000000";
@@ -31,17 +33,15 @@ public class MainMenuHandler implements CommandHandler {
 		try {
 			List<MenuVO> menuList = menuService.getMainMenuList();			
 			MenuVO menu = menuService.getMenuByMcode(mCode);
-				
-			Map<String,Object> jsonDataMap = new HashMap<String,Object>();
-			jsonDataMap.put("menuList", menuList);
-			jsonDataMap.put("menu", menu);
 			
-			JsonResolver.view(response, jsonDataMap);
-		} catch (Exception e) {
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			request.setAttribute("menuList",menuList);
+			request.setAttribute("menu",menu);
+		} catch (SQLException e) {			
 			e.printStackTrace();
+			url=null;
 		}
-		return null;
+		
+		return url;
 	}
 
 }

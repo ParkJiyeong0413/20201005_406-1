@@ -107,7 +107,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void remove(String id) throws SQLException {
-		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+
+			memberDAO.deleteMember(session, id);
+		} finally {
+			session.close();
+		}
 
 	}
 

@@ -24,7 +24,7 @@ public class LoginHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url=request.getContextPath()+"/main.html";
+		String url=request.getContextPath()+"/index.do";
 		
 		//로그인처리
 		String id=request.getParameter("id");
