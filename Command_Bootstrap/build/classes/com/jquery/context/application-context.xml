@@ -6,7 +6,6 @@
 
 	<!-- Repository Layer -->
 	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl" />
-	<bean id="memberDAO2" class="com.jsp.dao.MemberDAOImpl2" />
 	<bean id="boardDAO" class="com.jsp.dao.BoardDAOImpl" />
 	<bean id="attachDAO" class="com.jsp.dao.AttachDAOImpl" />
 	<bean id="replyDAO" class="com.jsp.dao.ReplyDAOImpl" />
