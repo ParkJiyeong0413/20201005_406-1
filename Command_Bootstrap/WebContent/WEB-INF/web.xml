@@ -4,21 +4,11 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:com/jquery/context/application-context.xml</param-value>
   </context-param>
+  
   <listener>
     <listener-class>com.jquery.listener.InitListener</listener-class>
   </listener>
-  <servlet>
-    <servlet-name>WebController</servlet-name>
-    <servlet-class>kr.or.ddit.controller.WebController</servlet-class>
-    <init-param>
-      <param-name>handler-config</param-name>
-      <param-value>/WEB-INF/classes/com/jquery/properties/handler.properties</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WebController</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
+  
   <filter>
     <filter-name>Set Character Encoding</filter-name>
     <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -43,4 +33,23 @@
     <filter-name>loginCheckFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  
+  <servlet>
+		<servlet-name>FrontServlet</servlet-name>
+		<servlet-class>com.jquery.controller.FrontServlet</servlet-class>
+		<init-param>
+			<param-name>handlerMapper</param-name>
+			<param-value>com.jquery.controller.HandlerMapper</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FrontServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+  
 </web-app>
+
+
+

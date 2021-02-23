@@ -18,20 +18,11 @@ import com.jquery.dao.ReplyDAO;
 import com.jquery.dao.ReplyDAOImpl;
 import com.jquery.dto.AttachVO;
 import com.jquery.dto.BoardVO;
-import com.jquery.mybatis.OracleIBatisSqlSessionFactory;
+import com.jquery.mybatis.OracleMyBatisSqlSessionFactory;
 
 public class BoardServiceImpl implements BoardService {
 
-	private static BoardServiceImpl instance = new BoardServiceImpl();
-
-	private BoardServiceImpl() {
-	}
-
-	public static BoardServiceImpl getInstance() {
-		return instance;
-	}
-
-	private SqlSessionFactory sqlSessionFactory = OracleIBatisSqlSessionFactory.getSqlSessionFactory();
+	private SqlSessionFactory sqlSessionFactory;
 	public void setSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}

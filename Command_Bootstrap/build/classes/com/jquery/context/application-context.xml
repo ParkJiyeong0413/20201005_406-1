@@ -2,21 +2,27 @@
 
 <beans>
 	<!-- dataSource -->
-	<bean id="sqlSessionFactory" class="com.jsp.mybatis.OracleMyBatisSqlSessionFactory" />
+	<bean id="sqlSessionFactory" class="com.jquery.mybatis.OracleMyBatisSqlSessionFactory" />
 
 	<!-- Repository Layer -->
-	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl" />
-	<bean id="boardDAO" class="com.jsp.dao.BoardDAOImpl" />
-	<bean id="attachDAO" class="com.jsp.dao.AttachDAOImpl" />
-	<bean id="replyDAO" class="com.jsp.dao.ReplyDAOImpl" />
+	<bean id="memberDAO" class="com.jquery.dao.MemberDAOImpl" />
+	<bean id="boardDAO" class="com.jquery.dao.BoardDAOImpl" />
+	<bean id="attachDAO" class="com.jquery.dao.AttachDAOImpl" />
+	<bean id="replyDAO" class="com.jquery.dao.ReplyDAOImpl" />
+	<bean id="menuDAO"  class="com.jquery.dao.MenuDAOImpl" />
 	
 	<!-- Service layer -->
-	<bean id="memberService" class="com.jsp.service.MemberServiceImpl">
+	<bean id="menuService" class="com.jquery.service.MenuServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="memberDAO" ref-value="memberDAO2"/>
+		<property name="menuDAO" ref-value="menuDAO" />
 	</bean>
 	
-	<bean id="boardService" class="com.jsp.service.BoardServiceImpl" >
+	<bean id="memberService" class="com.jquery.service.MemberServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="memberDAO" ref-value="memberDAO"/>
+	</bean>
+	
+	<bean id="boardService" class="com.jquery.service.BoardServiceImpl" >
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 		<property name="boardDAO" ref-value="boardDAO" />
 		<property name="replyDAO" ref-value="replyDAO" />

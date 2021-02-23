@@ -15,7 +15,7 @@ import com.jquery.dao.MemberDAOImpl;
 import com.jquery.dto.MemberVO;
 import com.jquery.exception.InvalidPasswordException;
 import com.jquery.exception.NotFoundIDException;
-import com.jquery.mybatis.OracleIBatisSqlSessionFactory;
+import com.jquery.mybatis.OracleMyBatisSqlSessionFactory;
 
 public class MemberServiceImpl implements MemberService {
 	
