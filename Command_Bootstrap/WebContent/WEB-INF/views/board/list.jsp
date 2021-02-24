@@ -8,32 +8,16 @@
 <c:set var="boardList" value="${dataMap.boardList }" />
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
 
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  <title>Board | home</title>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/resources/bootstrap/dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+ <style>
 
-  <style>
-	
-	table th,td{
-		text-align:center;		
-	}
+table th,td{
+	text-align:center;		
+}
 	
 </style>
-</head>
+
 <body class="hold-transition sidebar-mini">
 
 
@@ -135,9 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				</table>				
 			</div>
 			<div class="card-footer">
-				<ul id="pagination" class="pagination justify-content-center m-0">
-								
-				</ul>		
+				<%@ include file="/WEB-INF/views/common/pagination.jsp" %>	
 			</div>
 		</div>
 		
@@ -145,27 +127,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/resources/bootstrap/dist/js/adminlte.min.js"></script>
-<!-- handlebars -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" ></script>
-
-<!-- jquery cookie -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-<!-- common -->
-<script src="/resources/js/common.js"></script>
-
-
 </body>
-</html>
+
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 
 
