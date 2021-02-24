@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="cri" value="${pageMaker.cri }" /> 
  
@@ -85,7 +85,7 @@
 		              		<td>${member.pwd }</td>
 		              		<td>${member.email }</td>
 		              		<td>${member.phone }</td>
-		              		<td>${member.regDate }</td>
+		              		<td><fmt:formatDate value="${member.regDate }" pattern="" /></td>
 		              	</tr>
 		              	
 		              	</c:forEach>

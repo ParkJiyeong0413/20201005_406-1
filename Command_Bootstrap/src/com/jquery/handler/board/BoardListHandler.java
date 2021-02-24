@@ -23,21 +23,30 @@ public class BoardListHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	ObjectMapper mapper=new ObjectMapper();
 		
-		SearchCriteria cri = mapper.readValue(request.getReader(), SearchCriteria.class);
+		String url="board/list";
 		
-				
+		//입력..(JSON data로 올때만 가능)
+		//ObjectMapper mapper=new ObjectMapper();
+		//SearchCriteria cri = mapper.readValue(request.getReader(), SearchCriteria.class);
+		
+		String page = request.getParameter("page");
+		String perPageNum = request.getParameter("perPageNum");
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
+		
+		SearchCriteria cri = new SearchCriteria(page,perPageNum,searchType,keyword);
+		
 		try {
 			Map<String,Object> dataMap=boardService.getBoardList(cri);
 			
-			JsonResolver.view(response, dataMap);
+			request.setAttribute("dataMap", dataMap);
 			
 		} catch (Exception e) {
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			url=null;
 			e.printStackTrace();
 		}
-		return null;
+		return url;
 	}
 
 }
