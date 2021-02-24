@@ -100,13 +100,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<th>등록일</th>
 						<th style="width:10%;">조회수</th>
 					</tr>				
-					<c:if test="${empty boardList1 }" >
+					<c:if test="${empty boardList }" >
 						<tr>
 							<td colspan="5">
 								<strong>해당 내용이 없습니다.</strong>
 							</td>
 						</tr>
-					</c:if>			
+					</c:if>
+					<c:forEach items="${boardList }" var="board">
+						<tr style='font-size:0.85em;'>
+							<td>${board.bno }</td>
+							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden;
+										 white-space: nowrap; text-overflow: ellipsis;">
+							<a href="javascript:OpenWindow('detail.do?bno=${board.bno }','상세보기',800,700);">
+								<span class="col-sm-12 ">${board.title }
+									<c:if test="${board.replycnt ne 0 }">		
+										<span class="nav-item">															
+										&nbsp;&nbsp;<i class="fa fa-comment"></i>
+										<span class="badge badge-warning navbar-badge">${board.replycnt}</span>
+										</span>
+										
+									</c:if>
+								</span>
+							</a>
+							</td>
+							<td>${board.writer }</td>
+							<td>
+								<fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/>
+							</td>
+							<td><span class="badge bg-red">${board.viewcnt }</span></td>
+						</tr>
+					</c:forEach>
+								
 				</table>				
 			</div>
 			<div class="card-footer">

@@ -23,7 +23,7 @@ import com.jquery.mybatis.OracleMyBatisSqlSessionFactory;
 public class BoardServiceImpl implements BoardService {
 
 	private SqlSessionFactory sqlSessionFactory;
-	public void setSessionFactory(SqlSessionFactory sqlSessionFactory) {
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 
