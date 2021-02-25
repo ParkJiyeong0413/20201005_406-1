@@ -32,7 +32,21 @@ public class BoardModifyHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "board/modify_success";
-
+		
+		BoardVO board=null;
+		try {
+			board=modifyFile(request,response);
+			boardService.modify(board);		
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			url=null;
+		}finally {
+			request.setAttribute("board", board);
+		}
+		
+		
 		return url;
 	}
 
