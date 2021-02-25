@@ -29,7 +29,7 @@ public class BoardRegistHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url=null;
+		String url="board/regist_success";
 		
 		MultipartHttpServletRequestParser multi=null;
 		List<AttachVO> attachList=null;
@@ -47,8 +47,10 @@ public class BoardRegistHandler implements CommandHandler {
 			
 		} catch (NotMultipartFormDataException e) {
 			e.printStackTrace();
+			url="board/regist_fail";
 		} catch (Exception e) {
 			e.printStackTrace();
+			url="board/regist_fail";
 		}
 		
 		BoardVO board = new BoardVO();
@@ -61,7 +63,7 @@ public class BoardRegistHandler implements CommandHandler {
 		try {
 			boardService.regist(board);
 		}catch(SQLException e) {
-			
+			url="board/regist_fail";
 		}
 		return null;
 	}
