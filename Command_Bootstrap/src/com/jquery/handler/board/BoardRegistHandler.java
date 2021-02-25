@@ -65,7 +65,7 @@ public class BoardRegistHandler implements CommandHandler {
 		}catch(SQLException e) {
 			url="board/regist_fail";
 		}
-		return null;
+		return url;
 	}
 
 	
