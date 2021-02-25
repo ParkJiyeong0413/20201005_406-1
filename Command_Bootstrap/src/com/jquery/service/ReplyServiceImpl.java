@@ -18,13 +18,11 @@ import com.jquery.mybatis.OracleMyBatisSqlSessionFactory;
 public class ReplyServiceImpl implements ReplyService {
 
 	private SqlSessionFactory sqlSessionFactory ;
-
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 
-	private ReplyDAO replyDAO=new ReplyDAOImpl();
-
+	private ReplyDAO replyDAO;
 	public void setReplyDAO(ReplyDAO replyDAO) {
 		this.replyDAO = replyDAO;
 	}

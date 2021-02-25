@@ -10,6 +10,7 @@
 	<bean id="attachDAO" class="com.jquery.dao.AttachDAOImpl" />
 	<bean id="replyDAO" class="com.jquery.dao.ReplyDAOImpl" />
 	<bean id="menuDAO"  class="com.jquery.dao.MenuDAOImpl" />
+	<bean id="replyDAO" class="com.jquery.dao.ReplyDAOImpl" />
 	
 	<!-- Service layer -->
 	<bean id="menuService" class="com.jquery.service.MenuServiceImpl">
@@ -28,4 +29,11 @@
 		<property name="replyDAO" ref-value="replyDAO" />
 		<property name="attachDAO" ref-value="attachDAO" />
 	</bean>
+	
+	<bean id="replyService" class="com.jquery.service.ReplyServiceImpl" >
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="replyDAO" ref-value="replyDAO" />
+	</bean>
+	
+	
 </beans>

@@ -24,6 +24,9 @@ public class BoardDetailHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String url="board/detail";
+		
 		//1. parameter 수용..
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		String from = request.getParameter("from");
@@ -43,8 +46,9 @@ public class BoardDetailHandler implements CommandHandler {
 			
 			
 			//3. 결과 (JsonResolver : json)
-			JsonResolver.view(response, board);
+			//JsonResolver.view(response, board);
 			
+			request.setAttribute("board", board);
 			
 		}catch(SQLException e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -52,7 +56,7 @@ public class BoardDetailHandler implements CommandHandler {
 			throw e;
 		}
 		
-		return null;
+		return url;
 	}
 
 }
