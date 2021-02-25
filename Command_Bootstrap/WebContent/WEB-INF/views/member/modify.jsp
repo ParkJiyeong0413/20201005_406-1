@@ -2,27 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- icheck bootstrap -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
-<!-- Google Font: Source Sans Pro -->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<title>회원수정</title>
 
-</head>
 <body>
 
   <!-- Content Wrapper. Contains page content -->
@@ -114,70 +95,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<script src="<%=request.getContextPath() %>/resources/js/member/member.js" ></script>
 
-<!-- jQuery -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-
-<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
-
-<script>//회원 수정 submit
-function modify_go(){
-	//alert("modify btn click");
-	var form=$('form[role="form"]');	
-	form.submit();
+<script> 
+window.onload=function(){
+	Preview_picture('${member.picture}');
+	<%@ include file="modify_js.jsp" %>
 }
-</script>
-
-<script> //사진 미리보기
-var imageURL = "getPicture.do?picture=${member.picture}";
-$('div#pictureView').css({'background-image':'url('+imageURL+')',
-						  'background-position':'center',
-						  'background-size':'cover',
-						  'background-repeat':'no-repeat'
-						});
-</script>
-<script> //사진 변경
-$('input#inputFile').on('change',function(event){
-	//alert('file change');
-	
-	var fileFormat=
-		this.value.substr(this.value.lastIndexOf(".")+1).toUpperCase();
-	//이미지 확장자 jpg 확인
-	if(!(fileFormat=="JPG" || fileFormat=="JPEG")){
-		alert("이미지는 jpg 형식만 가능합니다.");
-		return;
-	} 
-	//이미지 파일 용량 체크
-	if(this.files[0].size>1024*1024*1){
-		alert("사진 용량은 1MB 이하만 가능합니다.");
-		return;
-	};
-	
-	document.getElementById('inputFileName').value=this.files[0].name;
-	if (this.files && this.files[0]) {
-		
-        var reader = new FileReader();
-        
-        reader.onload = function (e) {
-        	//이미지 미리보기	        	
-        	$('div#pictureView')
-        	.css({'background-image':'url('+e.target.result+')',
-				  'background-position':'center',
-				  'background-size':'cover',
-				  'background-repeat':'no-repeat'
-        		});
-        }
-        
-        reader.readAsDataURL(this.files[0]);
-	}
-	
-	// 이미지 변경 확인
-	$('input[name="uploadPicture"]').val(this.files[0].name);
-});
 </script>
 </body>
 

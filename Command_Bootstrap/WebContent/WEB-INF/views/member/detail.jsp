@@ -2,27 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- icheck bootstrap -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
-<!-- Google Font: Source Sans Pro -->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<title>회원상세보기</title>
 
-</head>
 <body>
 
   <!-- Content Wrapper. Contains page content -->
@@ -96,27 +77,17 @@
 
 
 
-<!-- jQuery -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 
-<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
+<script src="<%=request.getContextPath() %>/resources/js/member/member.js" ></script>
 <script> //사진이미지 불러오기
-var imageURL = "getPicture.do?picture=${member.picture}";
-$('div#pictureView').css({'background-image':'url('+imageURL+')',
-						  'background-position':'center',
-						  'background-size':'cover',
-						  'background-repeat':'no-repeat'
-						});
-$('input').css("border","none").prop("readonly",true);
+window.onload=function(){
+	Preview_picture('${member.picture}');
+}
 </script>
 
 </body>
-</html>
+
 
 
 

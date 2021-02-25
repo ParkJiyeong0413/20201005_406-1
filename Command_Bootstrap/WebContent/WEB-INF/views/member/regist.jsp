@@ -2,29 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 
+<title>회원등록</title>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- icheck bootstrap -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
-<!-- Google Font: Source Sans Pro -->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-</head>
 <body>
 
 	<!-- Content Wrapper. Contains page content -->
@@ -144,13 +123,6 @@
 </div>
 <!-- /.content-wrapper -->
 
-<!-- jQuery -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-
 
 <form role="imageForm" action="upload/picture.do" method="post" enctype="multipart/form-data">
 	<input id="inputFile" name="pictureFile" type="file" class="form-control" 
@@ -161,159 +133,13 @@
 
 
 <script>
-$('input#inputFile').on('change',function(event){
-	//alert('file change');
-	
-	//업로드 확인변수 초기화
-	$('input[name="checkUpload"]').val(0);
-	
-	var fileFormat=
-		this.value.substr(this.value.lastIndexOf(".")+1).toUpperCase();
-		
-	//이미지 확장자 jpg 확인
-	if(!(fileFormat=="JPG" || fileFormat=="JPEG")){
-		alert("이미지는 jpg/jpeg 형식만 가능합니다.");
-		$(this).val("");		
-		return;
-	} 
-	//이미지 파일 용량 체크
-	if(this.files[0].size>1024*1024*1){
-		alert("사진 용량은 1MB 이하만 가능합니다.");
-		return;
-	};
-	
-	document.getElementById('inputFileName').value=this.files[0].name;
-	
-	if (this.files && this.files[0]) {
-		var reader = new FileReader();
-		 reader.onload = function (e) {
-			  $('div#pictureView')
-	        	.css({'background-image':'url('+e.target.result+')',
-					  'background-position':'center',
-					  'background-size':'cover',
-					  'background-repeat':'no-repeat'
-	        		});
-		  }
-		reader.readAsDataURL(this.files[0]);
-		
-	}
-	
-});
-
-function upload_go(){
-	//alert("upload btn click");
-	
-	if($('input[name="pictureFile"]').val()==""){
-		alert("사진을 선택하세요.");
-		$('input[name="pictureFile"]').click();
-		return;
-	};	
-	
-	//form 태그 양식을 객체화	
-	var form = new FormData($('form[role="imageForm"]')[0]);
-	
-	$.ajax({
-		url:"<%=request.getContextPath()%>/member/picture.do",
-		data:form,
-		type:'post',
-		processData:false,
-		contentType:false,
-		success:function(data){
-			//업로드 확인변수 세팅
-			$('input[name="checkUpload"]').val(1);
-			
-			//저장된 파일명 저장.
-			$('input#oldFile').val(data); // 변경시 삭제될 파일명
-			$('form[role="form"]  input[name="picture"]').val(data);
-			
-			alert("사진이 업로드 되었습니다.");
-		},
-		error:function(error){
-			alert("현재 사진 업로드가 불가합니다.\n 관리자에게 연락바랍니다.");
-		}
-	});
-}
-	
-
-</script>
-<script>  // 아이디 중복확인 
-var checkedID="";
-function idCheck_go(){	
-	var input_ID=$('input[name="id"]');
-	
-	if(input_ID.val()==""){
-		alert("아이디를 입력하세요");
-		input_ID.focus();
-		return;
-	}else{
-		//아이디는 4~12자의 영문자와 숫자로만 입력
-		var reqID=/^[a-z]{1}[a-zA-Z0-9]{3,12}$/;
-		if(!reqID.test($('input[name="id"]').val())){
-			alert("아이디는 첫글자는 영소문자이며, \n4~13자의 영문자와 숫자로만 입력해야 합니다.");
-			$('input[name="id"]').focus();
-			return;
-		}
-	}
-	
-	var data = {id : input_ID.val().trim()};
-	
-	$.ajax({
-		url:"<%=request.getContextPath()%>/member/idCheck.do",
-		data:data,
-		type:'post',
-		success:function(result){
-			console.log(result);
-			if(result=="duplicated"){
-				alert("중복된 아이디 입니다.");
-				$('input[name="id"]').focus();
-			}else{
-				alert("사용가능한 아이디입니다.");
-				checkedID=input_ID.val().trim();
-				$('input[name="id"]').val(input_ID.val().trim());
-			}
-		},
-		error:function(error){
-			alert("시스템 장애로 가입이 불가합니다.");
-		}
-			
-	});
-}
-
-</script>
-<script> //회원등록
-function regist_go(){
-	//alert("등록 버튼 클릭");
-
-	var uploadCheck = $('input[name="checkUpload"]').val();
-	if(!(uploadCheck>0)){
-		alert("사진 업로드는 필수입니다.");	
-		//$('input[name="pictureFile"]').click();
-		return;
-	}
-	
-	if($('input[name="id"]').val()==""){
-		alert("아이디는 필수입니다.");
-		return;
-	} 
-	
-	if($('input[name="id"]').val()!=checkedID){
-		alert("아이디 중복확인이 필요합니다.");
-		return;
-	}
-	
-	if($('input[name="pwd"]').val()==""){
-		alert("패스워드는 필수입니다.");
-		return;
-	}	
-	if($('input[name="name"]').val()==""){
-		alert("이름은 필수입니다.");
-		return;
-	}	
-	
-	var form = $('form[role="form"]');
-	form.submit();
+window.onload=function(){
+	<%@ include file="regist_picture_upload.jsp" %>
+	<%@ include file="regist_idCheck.jsp" %>
+	<%@ include file="regist_submit.jsp" %>
 }
 </script>
+
 </body>
 </html>
 

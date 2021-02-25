@@ -22,8 +22,10 @@
 </script>
 
 <script>
-goPage('${menu.murl}','${menu.mcode}');
-subMenu('${menu.mcode}'.substring(0,3)+"0000");
+window.onload=function(){
+	goPage('${menu.murl}','${menu.mcode}');
+	subMenu('${menu.mcode}'.substring(0,3)+"0000");
+}
 </script>
 
 </body>

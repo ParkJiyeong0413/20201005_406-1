@@ -12,6 +12,9 @@
 <!-- handlebars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" ></script>
 
+<!-- Summernote -->
+<script src="/resources/bootstrap/plugins/summernote/summernote-bs4.min.js"></script>
+
 <!-- jquery cookie -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 

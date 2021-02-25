@@ -10,27 +10,6 @@
 
 <c:set var="cri" value="${pageMaker.cri }" /> 
  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- icheck bootstrap -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
-<!-- Google Font: Source Sans Pro -->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-</head>
 <body>
 	    <!-- Main content -->
     	<section class="content">
@@ -85,7 +64,7 @@
 		              		<td>${member.pwd }</td>
 		              		<td>${member.email }</td>
 		              		<td>${member.phone }</td>
-		              		<td><fmt:formatDate value="${member.regDate }" pattern="" /></td>
+		              		<td><fmt:formatDate value="${member.regDate }" pattern="yyyy-MM-dd" /></td>
 		              	</tr>
 		              	
 		              	</c:forEach>
@@ -100,17 +79,6 @@
     		</div> <!-- card-footer -->
           </div> <!-- card  -->
     	</section>	
-
-
-<!-- jQuery -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-
-<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
- 
 
 </body>
 

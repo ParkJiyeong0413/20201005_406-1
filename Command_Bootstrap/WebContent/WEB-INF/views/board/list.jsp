@@ -8,7 +8,6 @@
 <c:set var="boardList" value="${dataMap.boardList }" />
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
 
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
  <style>
 
@@ -46,7 +45,7 @@ table th,td{
     <div class="content">
      		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.html','글등록',800,700);">글등록</button>				
+				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','글등록',800,700);">글등록</button>				
 				<div id="keyword" class="card-tools" style="width:550px;">
 					<div class="input-group row">	
 						 <!-- sort num -->
@@ -129,7 +128,6 @@ table th,td{
   <!-- /.content-wrapper -->
 </body>
 
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 
 
